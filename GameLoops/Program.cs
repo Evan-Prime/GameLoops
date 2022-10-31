@@ -11,6 +11,9 @@ namespace GameLoops
         static void Main(string[] args)
         {
             Console.WriteLine("Game Loops!");
+            Console.WriteLine("");
+
+            Console.ReadKey(true);
         }
     }
 }
