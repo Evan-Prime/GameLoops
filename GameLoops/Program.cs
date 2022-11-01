@@ -8,59 +8,70 @@ namespace GameLoops
 {
     internal class Program
     {
-        static int[] ammo = new int[] { 6, 2, 25, 50, 10 };
+        
+        static bool gameOver; // true or false
+        static int x; // play position
+        static int y; // play position
 
         static void Main(string[] args)
         {
-            Console.WriteLine();
-            Console.WriteLine(" Game Loops!");
-            Console.WriteLine();
-            // count from 1..10
-            int count = 0;
-            for (int i = 0; i < 10; i++)
+            gameOver = false;
+
+            x = 0;
+            y = 0;
+
+            // game loop
+            while(gameOver == false)
             {
-                count++;
-                Console.WriteLine(" " + count);
+                PlayerUpdate();
+                PlayerDraw();
             }
 
-            Console.ReadKey(true);
+            Console.WriteLine("Game Over!");
+            Console.ReadKey();
+        }
+
+        static void PlayerUpdate()
+        {
+            // read user input
+            ConsoleKeyInfo input;
+            input = Console.ReadKey(true);
+
+            //Console.WriteLine(input);
+            //Console.WriteLine(input.KeyChar);
+            //Console.WriteLine(input.Key);
+            // update player position
+            if (input.Key == ConsoleKey.W)
+            {
+                y--;
+            }
+            if (input.Key == ConsoleKey.S)
+            {
+                y++;
+            }
+            if (input.Key == ConsoleKey.D)
+            {
+                x++;
+            }
+            if (input.Key == ConsoleKey.A)
+            {
+                x--;
+            }
+            if (input.Key == ConsoleKey.Escape)
+            {
+                gameOver = true;
+            }
+
+            // DEBUG
+            //Console.WriteLine("(" + x + "," + y + ")");
+
+        }
+
+        static void PlayerDraw()
+        {
             Console.Clear();
-
-            Console.WriteLine();
-            Console.WriteLine(" Game Loops!");
-            Console.WriteLine();
-            int start = 0;
-            int end = 20;
-
-            int score = start;
-
-            // count from start..end
-            while (score < end)
-            {
-                score++;
-                Console.WriteLine(" " + score);
-            }
-
-            Console.ReadKey(true);
-            Console.Clear();
-
-            Console.WriteLine();
-            Console.WriteLine(" Game Loops!:");
-            Console.WriteLine(" Weapon Edition");
-            Console.WriteLine();
-            // ammo count
-            int index = 0;
-            int indexEnd = 4;
-            int weaponNum = index + 1;
-
-            while (index <= indexEnd)
-            {
-                Console.WriteLine(" Weapon #"+ weaponNum + " Ammo: " + ammo[index]);
-                index++;
-                weaponNum++;
-            }
-
-            Console.ReadKey(true);
+            Console.SetCursorPosition(x, y);
+            Console.Write("()^-^)");
         }
     }
 }
